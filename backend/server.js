@@ -13,6 +13,17 @@ app.use(express.json());
 // Initialize Resend
 const resend = new Resend(process.env.RESEND_API_KEY);
 
+// ---- ROOT ROUTE (Health Check) ----
+app.get("/", (req, res) => {
+  res.json({ 
+    status: "Backend is running! 🚀",
+    endpoints: {
+      submit: "/submit (POST)",
+      sendEmail: "/send-email (POST)"
+    }
+  });
+});
+
 // ---- SUBMIT TO GOOGLE SHEET ----
 app.post("/submit", async (req, res) => {
   try {
