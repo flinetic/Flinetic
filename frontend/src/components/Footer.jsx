@@ -130,11 +130,11 @@ const Footer = () => {
             </ul>
           </div>
           <div>
-            <h4 className="text-sm uppercase tracking-[0.3em] text-white/90 font-bold mb-4">Connect With Ous</h4>
+            {/* <h4 className="text-sm uppercase tracking-[0.3em] text-white/90 font-bold mb-4">Connect With Ous</h4> */}
             <ul className="space-y-2 text-white/70 text-sm">
               {/* <li><a href="https://linkedin.com" target="_blank" rel="noreferrer" className="hover:text-white">LinkedIn</a></li> */}
-              <li><a href="https://wa.me/message/WLETXVKOL3Z2B1" target="_blank" rel="noreferrer" className="hover:text-white">WhatsApp</a></li>
-              <li><a href="mailto:flinetic.info@gmail.com" target="_blank" rel="noreferrer" className="hover:text-white">Mail Us</a></li>
+              {/* <li><a href="https://wa.me/message/WLETXVKOL3Z2B1" target="_blank" rel="noreferrer" className="hover:text-white">WhatsApp</a></li>
+              <li><a href="mailto:flinetic.info@gmail.com" target="_blank" rel="noreferrer" className="hover:text-white">Mail Us</a></li> */}
               {/* <li><a href="https://instagram.com" target="_blank" rel="noreferrer" className="hover:text-white">Instagram</a></li>
               <li><a href="https://faceboook.com" target="_blank" rel="noreferrer" className="hover:text-white">Facebook</a></li> */}
             </ul>
