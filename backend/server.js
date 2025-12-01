@@ -7,7 +7,21 @@ import { Resend } from "resend";
 dotenv.config();
 
 const app = express();
-app.use(cors());
+
+// Configure CORS to allow your frontend
+app.use(cors({
+  origin: [
+    'http://localhost:5173',
+    'http://localhost:5174', 
+    'https://flinetic-3na7.vercel.app',
+    'https://flinetic.vercel.app',
+    /\.vercel\.app$/  // Allow all Vercel preview deployments
+  ],
+  credentials: true,
+  methods: ['GET', 'POST', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
+}));
+
 app.use(express.json());
 
 // Initialize Resend
