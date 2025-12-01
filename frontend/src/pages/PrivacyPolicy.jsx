@@ -25,60 +25,66 @@ const PrivacyPolicy = () => {
               <section>
                 <h2 className="text-2xl font-semibold text-indigo-300 mb-4">1. Information We Collect</h2>
                 <p className="mb-4">
-                  We collect information you provide directly to us when you use our services, including:
+                  We may collect the following information when you use our services:
                 </p>
                 <ul className="list-disc list-inside space-y-2 ml-4">
-                  <li>Name and contact information</li>
-                  <li>Email address and phone number</li>
-                  <li>Project details and requirements</li>
-                  <li>Payment information (processed securely)</li>
+                  <li>Name, email, and contact details</li>
+                  <li>Project requirements and communication history</li>
+                  <li>Payment information (processed through secure third-party services)</li>
+                  <li>Files or content shared for project completion</li>
                 </ul>
               </section>
 
               <section>
                 <h2 className="text-2xl font-semibold text-indigo-300 mb-4">2. How We Use Your Information</h2>
-                <p className="mb-4">We use the information we collect to:</p>
+                <p className="mb-4">Your information is used to:</p>
                 <ul className="list-disc list-inside space-y-2 ml-4">
-                  <li>Provide and improve our services</li>
-                  <li>Communicate with you about projects</li>
-                  <li>Send important updates and notifications</li>
-                  <li>Process payments and transactions</li>
+                  <li>Deliver and improve our services</li>
+                  <li>Communicate regarding project updates</li>
+                  <li>Send invoices, notifications, or proposals</li>
+                  <li>Process payments</li>
+                  <li>Maintain service records</li>
                 </ul>
               </section>
 
               <section>
                 <h2 className="text-2xl font-semibold text-indigo-300 mb-4">3. Data Security</h2>
                 <p>
-                  We implement appropriate security measures to protect your personal information. 
-                  However, no method of transmission over the Internet is 100% secure.
+                  We implement reasonable security measures to protect your data. However, no online platform can guarantee 100% security.
                 </p>
               </section>
 
               <section>
                 <h2 className="text-2xl font-semibold text-indigo-300 mb-4">4. Third-Party Services</h2>
-                <p>
-                  We may use third-party services for payment processing, analytics, and communication. 
-                  These services have their own privacy policies.
+                <p className="mb-4">
+                  We may use trusted third-party tools for:
                 </p>
+                <ul className="list-disc list-inside space-y-2 ml-4">
+                  <li>Payment processing</li>
+                  <li>Analytics</li>
+                  <li>Communication</li>
+                  <li>Hosting and deployment</li>
+                </ul>
+                <p className="mt-4">These services have independent privacy policies.</p>
               </section>
 
               <section>
                 <h2 className="text-2xl font-semibold text-indigo-300 mb-4">5. Your Rights</h2>
-                <p className="mb-4">You have the right to:</p>
+                <p className="mb-4">You may request:</p>
                 <ul className="list-disc list-inside space-y-2 ml-4">
-                  <li>Access your personal data</li>
-                  <li>Request correction of your data</li>
-                  <li>Request deletion of your data</li>
-                  <li>Opt-out of marketing communications</li>
+                  <li>Access to your personal data</li>
+                  <li>Correction of inaccurate information</li>
+                  <li>Deletion of your data (if not legally required to retain)</li>
+                  <li>To opt out of marketing or promotional emails</li>
                 </ul>
               </section>
 
               <section>
                 <h2 className="text-2xl font-semibold text-indigo-300 mb-4">6. Contact Us</h2>
                 <p>
-                  If you have questions about this Privacy Policy, please contact us at:
+                  If you have questions about this Privacy Policy:
                   <br />
-                  <a href="mailto:flinetic.info@gmail.com" className="text-indigo-400 hover:text-indigo-300">
+                  📩 <a href="mailto:flinetic.info@gmail.com" className="text-indigo-400 hover:text-indigo-300">
                     flinetic.info@gmail.com
                   </a>
                 </p>

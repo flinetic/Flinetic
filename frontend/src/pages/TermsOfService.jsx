@@ -25,73 +25,81 @@ const TermsOfService = () => {
               <section>
                 <h2 className="text-2xl font-semibold text-indigo-300 mb-4">1. Acceptance of Terms</h2>
                 <p>
-                  By accessing and using FLINETIC's services, you accept and agree to be bound by these Terms of Service. 
-                  If you do not agree, please do not use our services.
+                  By accessing or using any services provided by FLINETIC, you agree to be bound by these Terms of Service. 
+                  If you do not agree, please discontinue use of our services.
                 </p>
               </section>
 
               <section>
                 <h2 className="text-2xl font-semibold text-indigo-300 mb-4">2. Services</h2>
-                <p className="mb-4">FLINETIC provides:</p>
+                <p className="mb-4">FLINETIC provides the following services:</p>
                 <ul className="list-disc list-inside space-y-2 ml-4">
-                  <li>Web development and design services</li>
+                  <li>Web development & design</li>
                   <li>Mobile application development</li>
+                  <li>SaaS and custom software development</li>
                   <li>E-commerce solutions</li>
-                  <li>Custom software development</li>
-                  <li>Maintenance and support services</li>
+                  <li>UI/UX design</li>
+                  <li>Maintenance & ongoing support</li>
                 </ul>
               </section>
 
               <section>
                 <h2 className="text-2xl font-semibold text-indigo-300 mb-4">3. Payment Terms</h2>
                 <p className="mb-4">
-                  Payment terms are agreed upon before project commencement. Typical terms include:
+                  Payment terms are discussed and agreed upon before the project begins. Standard terms include:
                 </p>
                 <ul className="list-disc list-inside space-y-2 ml-4">
-                  <li>50% upfront payment to begin work</li>
-                  <li>50% upon project completion</li>
-                  <li>Milestone-based payments for larger projects</li>
+                  <li>40% upfront to initiate the project</li>
+                  <li>60% upon final delivery</li>
+                  <li>For large projects, milestone-based payments may apply</li>
                 </ul>
+                <p className="mt-4">
+                  All payments must be completed before final delivery of files or deployment.
+                </p>
               </section>
 
               <section>
                 <h2 className="text-2xl font-semibold text-indigo-300 mb-4">4. Intellectual Property</h2>
-                <p>
-                  Upon full payment, you own the final deliverables. We retain the right to showcase the work 
-                  in our portfolio unless otherwise agreed.
+                <p className="mb-4">
+                  After full payment is received, all final deliverables become the client's property. FLINETIC retains the right to:
                 </p>
+                <ul className="list-disc list-inside space-y-2 ml-4">
+                  <li>Display completed work in our portfolio</li>
+                  <li>Use project screenshots for marketing</li>
+                </ul>
+                <p className="mt-4">unless otherwise agreed in writing.</p>
               </section>
 
               <section>
-                <h2 className="text-2xl font-semibold text-indigo-300 mb-4">5. Revisions and Changes</h2>
+                <h2 className="text-2xl font-semibold text-indigo-300 mb-4">5. Revisions & Changes</h2>
                 <p>
-                  Each project includes a specified number of revision rounds. Additional revisions may incur 
-                  extra charges as outlined in the project agreement.
+                  Each project includes a predefined number of revision rounds. Additional revisions or major scope changes 
+                  may incur extra charges based on the updated requirements.
                 </p>
               </section>
 
               <section>
                 <h2 className="text-2xl font-semibold text-indigo-300 mb-4">6. Project Timeline</h2>
                 <p>
-                  We strive to meet agreed timelines. Delays caused by client feedback or content provision 
-                  may extend the delivery date.
+                  We aim to follow agreed timelines. However, delays caused by late client responses, incomplete requirements, 
+                  or resource delays may extend the final delivery date.
                 </p>
               </section>
 
               <section>
                 <h2 className="text-2xl font-semibold text-indigo-300 mb-4">7. Limitation of Liability</h2>
                 <p>
-                  FLINETIC is not liable for any indirect, incidental, or consequential damages arising from 
-                  the use of our services.
+                  FLINETIC is not liable for any indirect, incidental, or consequential damages arising from the use of our services, 
+                  including website downtime, third-party service issues, or content inaccuracies provided by the client.
                 </p>
               </section>
 
               <section>
                 <h2 className="text-2xl font-semibold text-indigo-300 mb-4">8. Contact</h2>
                 <p>
-                  For questions about these Terms, contact us at:
+                  For questions about these Terms, contact:
                   <br />
-                  <a href="mailto:flinetic.info@gmail.com" className="text-indigo-400 hover:text-indigo-300">
+                  📩 <a href="mailto:flinetic.info@gmail.com" className="text-indigo-400 hover:text-indigo-300">
                     flinetic.info@gmail.com
                   </a>
                 </p>

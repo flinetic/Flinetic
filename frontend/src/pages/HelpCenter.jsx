@@ -7,27 +7,27 @@ const HelpCenter = () => {
   const faqs = [
     {
       question: "How long does it take to build a website?",
-      answer: "Typically 2-6 weeks depending on complexity. Simple websites take 2-3 weeks, while complex e-commerce or custom applications may take 4-6 weeks."
+      answer: "Usually 2–6 weeks, depending on complexity: Simple websites take 2–3 weeks, while e-commerce or custom web apps may take 4–6 weeks (estimated). Timeline depends on project complexity."
     },
     {
       question: "What is your pricing structure?",
-      answer: "We offer three packages: Starter (₹5,999+), Professional (₹19,999+), and Enterprise (₹39,999+). Each includes hosting, domain, and SSL for 1-3 years."
+      answer: "We offer three packages: Starter — ₹5,999+, Professional — ₹19,999+, and Enterprise — ₹39,999+. All packages include domain, hosting, and SSL for 1–3 years depending on the plan."
     },
     {
       question: "Do you provide ongoing support?",
-      answer: "Yes! We offer maintenance packages starting from ₹1,000/month for content updates and technical support."
+      answer: "Yes! Maintenance starts at ₹1,000/month and includes updates, backups, and technical support. Every package includes 1 month of free support."
     },
     {
       question: "Can I update the website myself?",
-      answer: "Absolutely! Our Professional and Enterprise packages include CMS integration, allowing you to update content without developer help."
+      answer: "Yes. Enterprise plans include CMS access, so you can edit content easily without needing a developer."
     },
     {
       question: "What payment methods do you accept?",
-      answer: "We accept bank transfers, UPI, credit/debit cards, and online payment gateways. Payment terms are typically 50% upfront and 50% on completion."
+      answer: "We accept UPI, bank transfer, credit/debit cards, and payment gateways. Standard payment terms: 40% upfront + 60% on completion."
     },
     {
       question: "Do you offer refunds?",
-      answer: "Refunds are considered on a case-by-case basis before significant work begins. Once development starts, refunds are not available, but we work to ensure your satisfaction."
+      answer: "Refunds may be provided only before major development work begins. Once project execution starts, refunds are not available — but we aim to ensure full client satisfaction."
     }
   ]
 
@@ -73,7 +73,7 @@ const HelpCenter = () => {
               className="bg-gradient-to-r from-indigo-500/10 to-sky-500/10 border border-indigo-500/20 rounded-xl p-8"
             >
               <h2 className="text-2xl font-semibold text-indigo-300 mb-4">Still need help?</h2>
-              <p className="text-white/70 mb-6">Our team is here to assist you</p>
+              <p className="text-white/70 mb-6">Our team is here to assist you.</p>
               
               <div className="grid md:grid-cols-3 gap-4">
                 <a href="mailto:flinetic.info@gmail.com" className="flex items-center gap-3 p-4 bg-white/5 rounded-lg hover:bg-white/10 transition-colors">
