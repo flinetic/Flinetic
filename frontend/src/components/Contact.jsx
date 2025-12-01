@@ -4,6 +4,7 @@ import { useInView } from 'framer-motion'
 import { useRef, useState } from 'react'
 import { Mail, MessageCircle, MapPin, Send } from 'lucide-react'
 import Footer from './Footer'
+import { API_URL } from '../config/api'
 
 const Contact = () => {
   const ref = useRef(null)
@@ -39,7 +40,7 @@ const Contact = () => {
 
     try {
       // 1. Send to Google Sheet
-      const sheetRes = await fetch("http://localhost:5000/submit", {
+      const sheetRes = await fetch(`${API_URL}/submit`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(sendData),
@@ -49,7 +50,7 @@ const Contact = () => {
       console.log("Sheet Response:", sheetData);
 
       // 2. Send Email via Backend
-      const emailRes = await fetch("http://localhost:5000/send-email", {
+      const emailRes = await fetch(`${API_URL}/send-email`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(sendData),

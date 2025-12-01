@@ -10,6 +10,7 @@ import {
 import { Link } from 'react-router-dom'
 import Footer from '../components/Footer'
 import web from '../assets/ServicesImages/web.svg'
+import { API_URL } from '../config/api'
 
 const WebServices = () => {
     const heroRef = useRef(null)
@@ -76,7 +77,7 @@ const WebServices = () => {
 
         try {
             // 1. Send to Google Sheet
-            const sheetResponse = await fetch("http://localhost:5000/submit", {
+            const sheetResponse = await fetch(`${API_URL}/submit`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ ...formData, formType: "webService" }),
@@ -85,7 +86,7 @@ const WebServices = () => {
             const sheetResult = await sheetResponse.json();
 
             // 2. Send Email
-            const emailResponse = await fetch("http://localhost:5000/send-email", {
+            const emailResponse = await fetch(`${API_URL}/send-email`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
