@@ -1,0 +1,142 @@
+@import "tailwindcss";
+
+:root {
+  /* Light Theme Color Palette - Clean & Modern */
+  --bg-primary: #ffffff; /* Main background - pure white */
+  --bg-secondary: #f8f9fa; /* Secondary background - very light gray */
+  --bg-tertiary: #f1f3f5; /* Cards and elevated surfaces */
+  --bg-hover: #e9ecef; /* Hover states */
+  --text-primary: #212529; /* Main text color - almost black */
+  --text-secondary: #6c757d; /* Secondary text - medium gray */
+  --border-color: #dee2e6; /* Borders - light gray */
+  --accent-primary: #061827; /* Bluish Purple accent */
+  --accent-secondary: #1a1a48; /* Purple accent */
+}
+
+html {
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+}
+
+
+
+body {
+  font-family: "Poppins", sans-serif;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+}
+
+.font-serif {
+  font-family: "Playfair Display", serif;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f3f4f6;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #1a1a48;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #1a1a48;
+}
+
+/* Smooth transitions for all elements */
+* {
+  transition: color 0.3s ease, background-color 0.3s ease,
+    border-color 0.3s ease, transform 0.3s ease, opacity 0.3s ease;
+}
+
+/* Custom gradient backgrounds */
+.bg-gradient-radial {
+  background: radial-gradient(circle at center, var(--tw-gradient-stops));
+}
+
+/* Blur backdrop for modals */
+.backdrop-blur-custom {
+  backdrop-filter: blur(20px);
+}
+
+/* Custom animations */
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+/* Selection styling */
+::selection {
+  background-color: #1a1a48;
+  color: #ffffff;
+}
+
+::-moz-selection {
+  background-color: #1a1a48;
+  color: #ffffff;
+}
+
+/* Custom breakpoint for extra small screens */
+@media (min-width: 475px) {
+  .xs\:inline {
+    display: inline;
+  }
+  .xs\:hidden {
+    display: none;
+  }
+}
+
+/* Styling for your ProjectModal/ConsultationModal's outermost element */
+.modal-overlay {
+  position: fixed; /* Must be fixed to stay put while the body is 'hidden' */
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow-y: scroll; /* VERY IMPORTANT: Makes the overlay itself scrollable */
+  z-index: 1000; /* Ensure it's above everything else */
+}
+
+/* Dropdown list background & text style */
+.custom-select option {
+  background-color: #18181b; /* zinc-900 */
+  color: white;
+}
+
+/* Hover effect for options (supported in most modern browsers) */
+.custom-select option:hover {
+  background-color: #4f46e5; /* indigo-600 */
+  color: white;
+}
+
+/* Selected text color inside the input box */
+.custom-select:valid {
+  color: white;
+}
+
+
+/* * Set a suitable thin font. If the user doesn't have Century Gothic, 
+         * it will fall back to a generic sans-serif.
+         */
+.flineti-text {
+    font-family: 'Century Gothic', Futura, sans-serif;
+    font-weight: 300; /* Thin font weight */
+    font-size: 80px;
+}
