@@ -73,6 +73,16 @@ app.post("/send-email", async (req, res) => {
   const { name, email, number, message } = req.body;
 
   try {
+    // Check if environment variables are set
+    if (!process.env.RESEND_API_KEY) {
+      throw new Error("RESEND_API_KEY is not configured");
+    }
+    if (!process.env.RECEIVER_EMAIL) {
+      throw new Error("RECEIVER_EMAIL is not configured");
+    }
+
+    console.log("Sending email to:", process.env.RECEIVER_EMAIL);
+
     const response = await resend.emails.send({
       from: "Flinetic <onboarding@resend.dev>",
       to: process.env.RECEIVER_EMAIL,
@@ -86,11 +96,11 @@ app.post("/send-email", async (req, res) => {
       `,
     });
 
-    console.log("Resend Response:", response);
+    console.log("✅ Email sent successfully:", response);
 
     res.json({ success: true, message: "Email sent successfully" });
   } catch (error) {
-    console.log("Resend Error:", error);
+    console.error("❌ Email Error:", error);
     res.status(500).json({ success: false, error: error.message });
   }
 });
