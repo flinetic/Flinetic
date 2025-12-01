@@ -1,43 +1,6 @@
-/* eslint-disable no-unused-vars */
-import { motion } from 'framer-motion'
-import { useInView } from 'framer-motion'
-import { useRef } from 'react'
-import { Github, Linkedin, Instagram, Heart, Layers } from 'lucide-react'
-import logo from '../assets/logo.svg'
+import { Link } from 'react-router-dom'
 
 const Footer = () => {
-  const ref = useRef(null)
-  const isInView = useInView(ref, { once: true, margin: "-50px" })
-
-  const socialLinks = [
-    { icon: Github, href: "#", label: "GitHub" },
-    { icon: Linkedin, href: "#", label: "LinkedIn" },
-    { icon: Instagram, href: "#", label: "Instagram" }
-  ]
-
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-        duration: 0.6
-      }
-    }
-  }
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 30 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.6,
-        ease: "easeOut"
-      }
-    }
-  }
-
   return (
     // <footer ref={ref} className="py-16 px-6 bg-gray-950 relative overflow-hidden">
     //   {/* Background elements */}
@@ -135,7 +98,7 @@ const Footer = () => {
       <div className="mx-auto px-6 lg:px-10 grid md:grid-cols-3 gap-5">
         <div className="md:col-span-2">
           <div className="text-2xl font-semibold text-white mb-4 flex items-center  tracking-widest">
-           {/* <img 
+            {/* <img 
                 src={logo} 
                 alt="FLINETIC Logo" 
                 className="w-8 h-8 sm:w-10 sm:h-10 object-contain" 
@@ -150,26 +113,27 @@ const Footer = () => {
           <div>
             <h4 className="text-sm uppercase tracking-[0.3em] text-white/90 font-bold mb-4">Navigate</h4>
             <ul className="space-y-2 text-white/70 text-sm">
-              <li><a href="/" className="hover:text-white">Home</a></li>
-              <li><a href="#pricing" className="hover:text-white">Pricing</a></li>
-              <li><a href="/register" className="hover:text-white">Get Started</a></li>
-              <li><a href="/contact" className="hover:text-white">Contact</a></li>
+              <li><Link to="/" className="hover:text-white">Home</Link></li>
+              <li><Link to="/services" className="hover:text-white">Services</Link></li>
+              <li><Link to="/portfolio" className="hover:text-white">Portfolio</Link></li>
+              <li><Link to="/contact" className="hover:text-white">Contact</Link></li>
             </ul>
           </div>
+          
           <div>
             <h4 className="text-sm uppercase tracking-[0.3em] text-white/90 font-bold mb-4">Support</h4>
             <ul className="space-y-2 text-white/70 text-sm">
-              <li><a href="/" className="hover:text-white">Help Center</a></li>
-              <li><a href="/" className="hover:text-white">Status</a></li>
-              <li><a href="/" className="hover:text-white">Privacy</a></li>
-              <li><a href="/" className="hover:text-white">Terms</a></li>
+              <li><Link to="/help-center" className="hover:text-white">Help Center</Link></li>
+              <li><Link to="/privacy-policy" className="hover:text-white">Privacy Policy</Link></li>
+              <li><Link to="/terms-of-service" className="hover:text-white">Terms of Service</Link></li>
+              <li><a href="mailto:flinetic.info@gmail.com" className="hover:text-white">Contact Support</a></li>
             </ul>
           </div>
           <div>
             <h4 className="text-sm uppercase tracking-[0.3em] text-white/90 font-bold mb-4">Socials</h4>
             <ul className="space-y-2 text-white/70 text-sm">
               <li><a href="https://linkedin.com" target="_blank" rel="noreferrer" className="hover:text-white">LinkedIn</a></li>
-              <li><a href="https://whatsapp.com" target="_blank" rel="noreferrer" className="hover:text-white">WhatsApp</a></li>
+              <li><a href="https://wa.me/9423608553" target="_blank" rel="noreferrer" className="hover:text-white">WhatsApp</a></li>
               <li><a href="https://instagram.com" target="_blank" rel="noreferrer" className="hover:text-white">Instagram</a></li>
               <li><a href="https://faceboook.com" target="_blank" rel="noreferrer" className="hover:text-white">Facebook</a></li>
             </ul>

@@ -20,6 +20,9 @@ import WhyChoose from './components/WhyChoose'
 import HowItWorks from './components/HowItWorks'
 import SaaS from './pages/saas/SaaSPlatform'
 import Dashboard from './pages/saas/dashboard/DashboardLayout'
+import PrivacyPolicy from './pages/PrivacyPolicy'
+import TermsOfService from './pages/TermsOfService'
+import HelpCenter from './pages/HelpCenter'
 
 function HomePage({ section }) {
   // Use scroll navigation hook for smooth scrolling to sections
@@ -111,7 +114,11 @@ function AppContent() {
         <Route path="/services/iot" element={<IoTServices />} />
         <Route path="/services/saas/dashboard" element={<Dashboard />} />
         {/* <Route path="/smart-decor" element={<SmartDecor />} /> */}
-        {/* New informational pages */}
+        
+        {/* Support pages */}
+        <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+        <Route path="/terms-of-service" element={<TermsOfService />} />
+        <Route path="/help-center" element={<HelpCenter />} />
       </Routes>
     </div>
   )
