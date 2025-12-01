@@ -45,10 +45,6 @@ function HomePage({ section }) {
       <div id="portfolio">
         <Portfolio />
       </div>
-      
-      {/* <div id="smart-decore">
-        <SmartDecorPreview />
-      </div> */}
       <div id="contact">
         <Contact />
       </div>

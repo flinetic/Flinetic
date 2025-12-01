@@ -87,15 +87,30 @@ const AppServices = () => {
         setProjectFormLoading(true);
 
         try {
-            const response = await fetch("/api/submit", {
+            // 1. Send to Google Sheet
+            const sheetResponse = await fetch("http://localhost:5000/submit", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ ...formData, formType: "appService" }),
             });
 
-            const result = await response.json();
+            const sheetResult = await sheetResponse.json();
 
-            if (result.success) {
+            // 2. Send Email
+            const emailResponse = await fetch("http://localhost:5000/send-email", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    name: formData.name,
+                    email: formData.email,
+                    number: formData.phone,
+                    message: `App Service Inquiry\n\nApp Type: ${formData.appType}\nPlatform: ${formData.platform}\nBudget: ${formData.budget}\nTimeline: ${formData.timeline}\nPackage: ${formData.package || 'Not selected'}\n\nDescription:\n${formData.appdescription}`
+                }),
+            });
+
+            const emailResult = await emailResponse.json();
+
+            if (sheetResult.success || emailResult.success) {
                 setProjectFormLoading(false);
                 setProjectFormSuccess(true);
 
@@ -116,7 +131,7 @@ const AppServices = () => {
                     setShowProjectModal(false);
                 }, 3000);
             } else {
-                throw new Error(result.error || "Submission failed");
+                throw new Error("Submission failed");
             }
 
         } catch (error) {

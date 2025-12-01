@@ -34,15 +34,19 @@ const Contact = () => {
       number: formData.number,
       project: formData.project,
       message: formData.message,
+      formType: "contact"
     };
 
     try {
       // 1. Send to Google Sheet
-      await fetch("http://localhost:5000/submit", {
+      const sheetRes = await fetch("http://localhost:5000/submit", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(sendData),
       });
+
+      const sheetData = await sheetRes.json();
+      console.log("Sheet Response:", sheetData);
 
       // 2. Send Email via Backend
       const emailRes = await fetch("http://localhost:5000/send-email", {
@@ -51,8 +55,8 @@ const Contact = () => {
         body: JSON.stringify(sendData),
       });
 
-      const data = await emailRes.json();
-      console.log("Email Response:", data);
+      const emailData = await emailRes.json();
+      console.log("Email Response:", emailData);
 
       alert("Message sent successfully!");
 
@@ -89,7 +93,7 @@ const Contact = () => {
   }
 
   return (
-    <section id='contact' ref={ref} className="pt-32 px-6 relative bg-gray-950 overflow-hidden">
+    <section id='contact' ref={ref} className="pt-32 px-4 md:px-6 relative bg-gray-950 overflow-hidden">
       <div className="absolute inset-0">
         <div className="absolute inset-0 bg-gradient-to-br from-gray-900 via-gray-950 to-black opacity-90" />
         <div className="absolute -top-32 right-0 w-[36rem] h-[36rem] bg-indigo-500/30 blur-[160px]" />
@@ -98,7 +102,7 @@ const Contact = () => {
 
       <div className="max-w-7xl mx-auto relative z-10">
         <motion.div initial="hidden" animate={isInView ? "visible" : "hidden"} variants={containerVariants}>
-          
+
           <motion.p className="uppercase tracking-[0.3em] text-center text-base md:text-2xl text-indigo-300 mb-4" variants={itemVariants}>
             Let's Build Something Remarkable
           </motion.p>
@@ -110,14 +114,14 @@ const Contact = () => {
             Ready to transform your vision into reality? Let's start the conversation.
           </motion.h2>
 
-          <div className="grid lg:grid-cols-2 gap-16 items-start">
-            
+          <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-start">
+
             {/* Contact Form */}
             <motion.div variants={itemVariants}>
               <form onSubmit={handleSubmit} className="space-y-6">
-                
-                <div className="grid md:grid-cols-2 gap-6">
-                  
+
+                <div className="grid sm:grid-cols-2 gap-4 md:gap-6">
+
                   <motion.div whileFocus={{ scale: 1.02 }} transition={{ duration: 0.2 }}>
                     <input
                       type="text"
@@ -238,11 +242,11 @@ const Contact = () => {
                 </motion.div>
               </div>
 
-              <motion.div className="h-64 bg-zinc-800/30 rounded-xl overflow-hidden relative" whileHover={{ scale: 1.02 }}>
+              <motion.div className="h-64 bg-zinc-800/30 rounded-xl overflow-hidden relative w-full" whileHover={{ scale: 1.02 }}>
                 <iframe
                   src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d121059.0344739699!2d73.86296739999999!3d18.52461645!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bc2bf2e67461101%3A0x828d43bf9d9ee343!2sPune%2C%20Maharashtra!5e0!3m2!1sen!2sin!4v1764513418879!5m2!1sen!2sin"
-                  width="600"
-                  height="450"
+                  width="100%"
+                  height="100%"
                   style={{ border: 0 }}
                   allowFullScreen
                   loading="lazy"

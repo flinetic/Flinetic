@@ -16,19 +16,30 @@ const resend = new Resend(process.env.RESEND_API_KEY);
 // ---- SUBMIT TO GOOGLE SHEET ----
 app.post("/submit", async (req, res) => {
   try {
-    const scriptURL =
-      "https://script.google.com/macros/s/AKfycbxHKNJsq2Bm76skPcudrxyr-0XmYOHct8Z5ZVV7-PzBfkucWTDPN0gyQWNvM38vMIos/exec";
+    console.log("📝 Received data:", JSON.stringify(req.body, null, 2));
 
-    await fetch(scriptURL, {
+    const scriptURL =
+      "https://script.google.com/macros/s/AKfycbxCsYWJ9uXGggzxvXWvfHfSP53oLPDpvwpUvk_Khggmmx8VrbKsw7Cn80FyI27OBHL4Bg/exec";
+
+    const response = await fetch(scriptURL, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(req.body),
     });
 
-    res.json({ success: true });
+    const responseText = await response.text();
+    console.log("📊 Google Sheets Response:", responseText);
+
+    if (!response.ok) {
+      throw new Error(`Google Sheets API returned status ${response.status}: ${responseText}`);
+    }
+
+    const result = JSON.parse(responseText);
+    console.log("✅ Successfully submitted to Google Sheets");
+    res.json(result);
   } catch (err) {
-    console.log(err);
-    res.json({ success: true }); // Even if sheet fails you said sheet still saves
+    console.error("❌ Error submitting to Google Sheets:", err);
+    res.status(500).json({ success: false, error: err.message });
   }
 });
 
