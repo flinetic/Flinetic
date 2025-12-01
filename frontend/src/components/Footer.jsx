@@ -3,6 +3,7 @@ import { motion } from 'framer-motion'
 import { useInView } from 'framer-motion'
 import { useRef } from 'react'
 import { Github, Linkedin, Instagram, Heart, Layers } from 'lucide-react'
+import logo from '../assets/logo.svg'
 
 const Footer = () => {
   const ref = useRef(null)
@@ -133,8 +134,12 @@ const Footer = () => {
     <footer className="bottom-0 text-white pt-16 pb-5">
       <div className="mx-auto px-6 lg:px-10 grid md:grid-cols-3 gap-5">
         <div className="md:col-span-2">
-          <div className="text-2xl font-semibold text-white mb-4 flex items-center gap-2 tracking-widest">
-            <Layers className="w-6 h-6 text-indigo-400" />
+          <div className="text-2xl font-semibold text-white mb-4 flex items-center  tracking-widest">
+           {/* <img 
+                src={logo} 
+                alt="FLINETIC Logo" 
+                className="w-8 h-8 sm:w-10 sm:h-10 object-contain" 
+              /> */}
             <span className='tracking-widest font-semibold bg-gradient-to-r from-white/70  to-indigo-600 bg-clip-text text-transparent'>FLINETIC</span>
           </div>
           <p className="text-indigo-200">

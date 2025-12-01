@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react'
 import { Menu, X } from 'lucide-react'
 import { Link, useLocation } from 'react-router-dom'
 import useScrollSpy from '../hooks/useScrollSpy'
+import logo from '../assets/logo.svg'
 
 
 const Navigation = () => {
@@ -81,29 +82,22 @@ const Navigation = () => {
           {/* Logo */}
           <Link to="/">
             <motion.div
-              className="flex items-center cursor-pointer"
+              className="flex items-center cursor-pointer gap-2 sm:gap-3"
               whileHover={{ scale: 1.05 }}
               transition={{ duration: 0.2 }}
             >
-              {/* <div className="mr-3 sm:mr-5">
-                <div className="">
-
-                  <img src={logo} alt="FLINETIC Logo" className="w-10/12 h-10 sm:w-10 sm:h-10 lg:w-20 lg:h-20 lg:py-4" />
-                </div>
-
-              </div> */}
+              {/* <img 
+                src={logo} 
+                alt="FLINETIC Logo" 
+                className="w-8 h-8 sm:w-10 sm:h-10 object-contain" 
+              /> */}
               <div
-                className={`text-3xl ${isScrolled
-                  ? 'bg-gradient-to-r from-indigo-500  to-indigo-950 bg-clip-text text-transparent'
-                  : 'bg-gradient-to-r from-white/70  to-indigo-600 bg-clip-text text-transparent'
-                  } font-semibold tracking-widest`} >
-
-
-
+                className={`text-2xl sm:text-3xl ${isScrolled
+                  ? 'bg-gradient-to-r from-indigo-500 to-indigo-950 bg-clip-text text-transparent'
+                  : 'bg-gradient-to-r from-white/70 to-indigo-600 bg-clip-text text-transparent'
+                  } font-semibold tracking-widest`}
+              >
                 FLINETIC
-
-
-
               </div>
             </motion.div>
           </Link>
