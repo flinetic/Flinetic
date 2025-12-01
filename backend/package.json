@@ -8,6 +8,6 @@
     "resend": "^6.5.2"
   },
   "engines": {
-    "node": "18.x"
+    "node": "20.x"
   }
 }
