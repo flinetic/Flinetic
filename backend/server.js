@@ -44,7 +44,7 @@ app.post("/submit", async (req, res) => {
     console.log("📝 Received data:", JSON.stringify(req.body, null, 2));
 
     const scriptURL =
-      "https://script.google.com/macros/s/AKfycbxCsYWJ9uXGggzxvXWvfHfSP53oLPDpvwpUvk_Khggmmx8VrbKsw7Cn80FyI27OBHL4Bg/exec";
+      "https://script.google.com/macros/s/AKfycbxUX5xV3VZbf63tF12-W_Ks7QEfp6HhhCnuRa8C9ks2xL86rd9ppn1wgrEUYhOq1q9K4A/exec";
 
     const response = await fetch(scriptURL, {
       method: "POST",
