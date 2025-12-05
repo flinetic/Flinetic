@@ -83,7 +83,7 @@ const AppServices = () => {
         }));
     };
 
-    const handleProjectSubmit = async (e) => {
+     const handleProjectSubmit = async (e) => {
         e.preventDefault();
         setProjectFormLoading(true);
 
@@ -137,17 +137,17 @@ const AppServices = () => {
             setShowProjectModal(false);
         }, 3000);
 
-    }
-            } else {
-                throw new Error("Submission failed");
-            }
+        }
+        else {
+          throw new Error("Submission failed");
+        }
 
         } catch (error) {
             console.error("Error submitting form:", error);
             setProjectFormLoading(false);
             alert("There was an error submitting your form. Please try again.");
         }
-    }
+      
 
     const handleConsultationSubmit = async (e) => {
     e.preventDefault();
