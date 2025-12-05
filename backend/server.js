@@ -74,7 +74,7 @@ app.post("/submit", async (req, res) => {
 // ---- SEND EMAIL USING RESEND ----
 // ---- SEND EMAIL USING RESEND ----
 app.post("/send-email", async (req, res) => {
-  const { name, email, number, message, projectType, budget, timeline, package: pkg, formType } = req.body;
+  const { name, email, number, description, projectType, budget, timeline, package: pkg, formType } = req.body;
 
   try {
     if (!process.env.RESEND_API_KEY) {
@@ -97,7 +97,7 @@ app.post("/send-email", async (req, res) => {
           <p><strong>Name:</strong> ${name}</p>
           <p><strong>Email:</strong> ${email}</p>
           <p><strong>Number:</strong> ${number}</p>
-          <p><strong>Message:</strong> ${message}</p>
+          <p><strong>Message:</strong> ${description}</p>
         `;
         break;
 
@@ -139,7 +139,7 @@ app.post("/send-email", async (req, res) => {
           <p><strong>Email:</strong> ${email}</p>
           <p><strong>Phone:</strong> ${number}</p>
           <p><strong>Preferred Date/Time:</strong> ${timeline || 'Not provided'}</p>
-          <p><strong>Message:</strong> ${message}</p>
+          <p><strong>Message:</strong> ${description}</p>
         `;
         break;
 
