@@ -45,7 +45,7 @@ app.post("/submit", async (req, res) => {
 
     const GOOGLE_SCRIPT_URL = process.env.GOOGLE_SCRIPT_URL;
 
-    if (!scriptURL) {
+    if (!GOOGLE_SCRIPT_URL ) {
       throw new Error("GOOGLE_SCRIPT_URL is missing from .env");
     }
 
