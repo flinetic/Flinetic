@@ -72,77 +72,123 @@ const WebServices = () => {
     }, [selectedPackage]);
 
     const handleProjectSubmit = async (e) => {
-        e.preventDefault();
-        setProjectFormLoading(true);
+    e.preventDefault();
+    setProjectFormLoading(true);
 
-        try {
-            // 1. Send to Google Sheet
-            const sheetResponse = await fetch(`${API_URL}/submit`, {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ ...formData, formType: "webService" }),
-            });
+    try {
+        // 1️⃣ Send to Google Sheet
+        const sheetResponse = await fetch(`${API_URL}/submit`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ ...formData, formType: "webService" }),
+        });
+        const sheetResult = await sheetResponse.json();
 
-            const sheetResult = await sheetResponse.json();
+        // 2️⃣ Send Email
+        const emailResponse = await fetch(`${API_URL}/send-email`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                formType: "webService",  // important
+                name: formData.name,
+                email: formData.email,
+                number: formData.phone,
+                projectType: formData.projectType,
+                budget: formData.budget,
+                timeline: formData.timeline,
+                package: formData.package || "Not selected",
+                description: formData.description
+            }),
+        });
+        const emailResult = await emailResponse.json();
 
-            // 2. Send Email
-            const emailResponse = await fetch(`${API_URL}/send-email`, {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({
-                    name: formData.name,
-                    email: formData.email,
-                    number: formData.phone,
-                    message: `Web Service Inquiry\n\nProject Type: ${formData.projectType}\nBudget: ${formData.budget}\nTimeline: ${formData.timeline}\nPackage: ${formData.package || 'Not selected'}\n\nDescription:\n${formData.description}`
-                }),
-            });
+        if (!sheetResult.success) throw new Error("Sheet submission failed");
+        if (!emailResult.success) throw new Error("Email sending failed: " + emailResult.error);
 
-            const emailResult = await emailResponse.json();
-
-            if (sheetResult.success || emailResult.success) {
-                setProjectFormLoading(false);
-                setProjectFormSuccess(true);
-
-                setFormData({
-                    name: "",
-                    email: "",
-                    phone: "",
-                    projectType: "",
-                    budget: "",
-                    timeline: "",
-                    description: "",
-                    package: "",
-                });
-
-                setTimeout(() => {
-                    setProjectFormSuccess(false);
-                    setShowProjectModal(false);
-                }, 3000);
-            } else {
-                throw new Error("Submission failed");
-            }
-
-        } catch (error) {
-            console.error("Error submitting form:", error);
-            setProjectFormLoading(false);
-            alert("There was an error submitting your form. Please try again.");
-        }
-    };
-
-    const handleConsultationSubmit = async (e) => {
-        e.preventDefault()
-        setConsultationFormLoading(true)
+        // ✅ Success
+        setProjectFormLoading(false);
+        setProjectFormSuccess(true);
+        setFormData({
+            name: "",
+            email: "",
+            phone: "",
+            projectType: "",
+            budget: "",
+            timeline: "",
+            description: "",
+            package: "",
+        });
 
         setTimeout(() => {
-            setConsultationFormLoading(false)
-            setConsultationFormSuccess(true)
+            setProjectFormSuccess(false);
+            setShowProjectModal(false);
+        }, 3000);
 
-            setTimeout(() => {
-                setConsultationFormSuccess(false)
-                setShowConsultationModal(false)
-            }, 3000)
-        }, 2000)
+    } catch (error) {
+        console.error("Error submitting form:", error);
+        setProjectFormLoading(false);
+        alert("There was an error submitting your form. Please try again.");
     }
+};
+
+    const handleConsultationSubmit = async (e) => {
+    e.preventDefault();
+    setConsultationFormLoading(true);
+
+    try {
+        // Send to Google Sheet (optional if you have a separate sheet for consultations)
+        const sheetResponse = await fetch(`${API_URL}/submit`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ ...formData, formType: "consultation" }),
+        });
+        const sheetResult = await sheetResponse.json();
+
+        // Send Email
+        const emailResponse = await fetch(`${API_URL}/send-email`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                formType: "consultation",  // important
+                name: formData.name,
+                email: formData.email,
+                number: formData.phone,
+                timeline: formData.timeline, // can be preferred date/time
+                message: formData.description
+            }),
+        });
+        const emailResult = await emailResponse.json();
+
+        if (!sheetResult.success) throw new Error("Sheet submission failed");
+        if (!emailResult.success) throw new Error("Email sending failed: " + emailResult.error);
+
+        // ✅ Success
+        setConsultationFormLoading(false);
+        setConsultationFormSuccess(true);
+
+        setFormData({
+            name: "",
+            email: "",
+            phone: "",
+            projectType: "",
+            budget: "",
+            timeline: "",
+            description: "",
+            package: "",
+        });
+
+        setTimeout(() => {
+            setConsultationFormSuccess(false);
+            setShowConsultationModal(false);
+        }, 3000);
+
+    } catch (error) {
+        console.error("Error submitting consultation form:", error);
+        setConsultationFormLoading(false);
+        alert("There was an error submitting your consultation form. Please try again.");
+    }
+};
+
 
     const isHeroInView = useInView(heroRef, { once: true, margin: "-100px" })
     const isCategoriesInView = useInView(categoriesRef, { once: true, margin: "-100px" })
