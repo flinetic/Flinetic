@@ -136,18 +136,13 @@ const AppServices = () => {
             setProjectFormSuccess(false);
             setShowProjectModal(false);
         }, 3000);
-
-        }
-        else {
-          throw new Error("Submission failed");
-        }
-
+        
         } catch (error) {
             console.error("Error submitting form:", error);
             setProjectFormLoading(false);
             alert("There was an error submitting your form. Please try again.");
         }
-      
+    }
 
     const handleConsultationSubmit = async (e) => {
     e.preventDefault();
