@@ -104,7 +104,7 @@ app.post("/send-email", async (req, res) => {
       case "webService": // Packages form
         subject = "New Web Service / Package Inquiry";
         htmlBody = `
-          <h2>New Web Service Inquiry</h2>
+          <h2>Web Service Inquiry</h2>
           <p><strong>Name:</strong> ${name}</p>
           <p><strong>Email:</strong> ${email}</p>
           <p><strong>Phone:</strong> ${number}</p>
@@ -112,14 +112,14 @@ app.post("/send-email", async (req, res) => {
           <p><strong>Budget:</strong> ${budget}</p>
           <p><strong>Timeline:</strong> ${timeline}</p>
           <p><strong>Package:</strong> ${pkg || 'Not selected'}</p>
-          <p><strong>Description:</strong> ${message}</p>
+          <p><strong>Description:</strong> ${description}</p>
         `;
         break;
 
        case "appService": // Packages form
-        subject = "New Web Service / Package Inquiry";
+        subject = "New App Service / Package Inquiry";
         htmlBody = `
-          <h2>New Web Service Inquiry</h2>
+          <h2>App Service Inquiry</h2>
           <p><strong>Name:</strong> ${name}</p>
           <p><strong>Email:</strong> ${email}</p>
           <p><strong>Phone:</strong> ${number}</p>
@@ -127,7 +127,7 @@ app.post("/send-email", async (req, res) => {
           <p><strong>Budget:</strong> ${budget}</p>
           <p><strong>Timeline:</strong> ${timeline}</p>
           <p><strong>Package:</strong> ${pkg || 'Not selected'}</p>
-          <p><strong>Description:</strong> ${message}</p>
+          <p><strong>Description:</strong> ${description}</p>
         `;
         break;  
 
