@@ -67,7 +67,7 @@ const AppServices = () => {
         name: '',
         email: '',
         phone: '',
-        appType: '',
+        projectType: '',
         platform: '',
         budget: '',
         appdescription: '',
@@ -106,7 +106,7 @@ const AppServices = () => {
                 name: formData.name,
                 email: formData.email,
                 number: formData.phone,
-                appType: formData.appType,
+                projectType: formData.projectType,
                 budget: formData.budget,
                 timeline: formData.timeline,
                 package: formData.package || "Not selected",
@@ -125,7 +125,7 @@ const AppServices = () => {
             name: "",
             email: "",
             phone: "",
-            appType: "",
+            projectType: "",
             budget: "",
             timeline: "",
             description: "",
@@ -994,8 +994,8 @@ const AppServices = () => {
                                                     <div>
                                                         <label className="block text-indigo-300 font-medium mb-2">App Type *</label>
                                                         <select
-                                                            name="appType"
-                                                            value={formData.appType}
+                                                            name="projectType"
+                                                            value={formData.projectType}
                                                             onChange={handleInputChange}
                                                             className="w-full px-3 py-2 bg-zinc-700 border border-zinc-600 rounded-lg text-white focus:border-indigo-400 focus:outline-none">
                                                             <option value="">Select app type</option>
