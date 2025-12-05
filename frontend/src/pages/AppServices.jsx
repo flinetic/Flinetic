@@ -125,7 +125,7 @@ const AppServices = () => {
             name: "",
             email: "",
             phone: "",
-            projectType: "",
+            appType: "",
             budget: "",
             timeline: "",
             description: "",
