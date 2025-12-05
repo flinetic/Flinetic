@@ -116,6 +116,21 @@ app.post("/send-email", async (req, res) => {
         `;
         break;
 
+       case "appService": // Packages form
+        subject = "New Web Service / Package Inquiry";
+        htmlBody = `
+          <h2>New Web Service Inquiry</h2>
+          <p><strong>Name:</strong> ${name}</p>
+          <p><strong>Email:</strong> ${email}</p>
+          <p><strong>Phone:</strong> ${number}</p>
+          <p><strong>App Type:</strong> ${projectType}</p>
+          <p><strong>Budget:</strong> ${budget}</p>
+          <p><strong>Timeline:</strong> ${timeline}</p>
+          <p><strong>Package:</strong> ${pkg || 'Not selected'}</p>
+          <p><strong>Description:</strong> ${message}</p>
+        `;
+        break;  
+
       case "consultation":
         subject = "New Consultation Request";
         htmlBody = `
