@@ -102,7 +102,6 @@ const AppServices = () => {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
-                formType: "appService",  // important
                 name: formData.name,
                 email: formData.email,
                 number: formData.phone,
