@@ -99,38 +99,45 @@ const AppServices = () => {
 
             // 2. Send Email
             const emailResponse = await fetch(`${API_URL}/send-email`, {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({
-                    name: formData.name,
-                    email: formData.email,
-                    number: formData.phone,
-                    message: `App Service Inquiry\n\nApp Type: ${formData.appType}\nPlatform: ${formData.platform}\nBudget: ${formData.budget}\nTimeline: ${formData.timeline}\nPackage: ${formData.package || 'Not selected'}\n\nDescription:\n${formData.appdescription}`
-                }),
-            });
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                formType: "appService",  // important
+                name: formData.name,
+                email: formData.email,
+                number: formData.phone,
+                appType: formData.appType,
+                budget: formData.budget,
+                timeline: formData.timeline,
+                package: formData.package || "Not selected",
+                description: formData.description
+            }),
+        });
+        const emailResult = await emailResponse.json();
 
-            const emailResult = await emailResponse.json();
+        if (!sheetResult.success) throw new Error("Sheet submission failed");
+        if (!emailResult.success) throw new Error("Email sending failed: " + emailResult.error);
 
-            if (sheetResult.success || emailResult.success) {
-                setProjectFormLoading(false);
-                setProjectFormSuccess(true);
+        // ✅ Success
+        setProjectFormLoading(false);
+        setProjectFormSuccess(true);
+        setFormData({
+            name: "",
+            email: "",
+            phone: "",
+            projectType: "",
+            budget: "",
+            timeline: "",
+            description: "",
+            package: "",
+        });
 
-                setFormData({
-                    name: '',
-                    email: '',
-                    phone: '',
-                    appType: '',
-                    platform: '',
-                    budget: '',
-                    appdescription: '',
-                    timeline: '',
-                    package: "",
-                });
+        setTimeout(() => {
+            setProjectFormSuccess(false);
+            setShowProjectModal(false);
+        }, 3000);
 
-                setTimeout(() => {
-                    setProjectFormSuccess(false);
-                    setShowProjectModal(false);
-                }, 3000);
+    }
             } else {
                 throw new Error("Submission failed");
             }
@@ -143,19 +150,63 @@ const AppServices = () => {
     }
 
     const handleConsultationSubmit = async (e) => {
-        e.preventDefault()
-        setConsultationFormLoading(true)
+    e.preventDefault();
+    setConsultationFormLoading(true);
+
+    try {
+        // Send to Google Sheet (optional if you have a separate sheet for consultations)
+        const sheetResponse = await fetch(`${API_URL}/submit`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ ...formData, formType: "consultation" }),
+        });
+        const sheetResult = await sheetResponse.json();
+
+        // Send Email
+        const emailResponse = await fetch(`${API_URL}/send-email`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                formType: "consultation",  // important
+                name: formData.name,
+                email: formData.email,
+                number: formData.phone,
+                timeline: formData.timeline, // can be preferred date/time
+                message: formData.description
+            }),
+        });
+        const emailResult = await emailResponse.json();
+
+        if (!sheetResult.success) throw new Error("Sheet submission failed");
+        if (!emailResult.success) throw new Error("Email sending failed: " + emailResult.error);
+
+        // ✅ Success
+        setConsultationFormLoading(false);
+        setConsultationFormSuccess(true);
+
+        setFormData({
+            name: "",
+            email: "",
+            phone: "",
+            projectType: "",
+            budget: "",
+            timeline: "",
+            description: "",
+            package: "",
+        });
 
         setTimeout(() => {
-            setConsultationFormLoading(false)
-            setConsultationFormSuccess(true)
+            setConsultationFormSuccess(false);
+            setShowConsultationModal(false);
+        }, 3000);
 
-            setTimeout(() => {
-                setConsultationFormSuccess(false)
-                setShowConsultationModal(false)
-            }, 3000)
-        }, 2000)
+    } catch (error) {
+        console.error("Error submitting consultation form:", error);
+        setConsultationFormLoading(false);
+        alert("There was an error submitting your consultation form. Please try again.");
     }
+};
+
 
     const appCategories = [
         {
@@ -1092,6 +1143,154 @@ const AppServices = () => {
 
                                     </div>
                                 </>
+                            )}
+                        </motion.div>
+                    </motion.div>
+                )}
+            </AnimatePresence>
+
+            {/* Consultation Modal */}
+            <AnimatePresence>
+                {showConsultationModal && (
+                    <motion.div
+                        className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-6"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        onClick={() => setShowConsultationModal(false)}
+                    >
+                        <motion.div
+                            className="bg-zinc-800 rounded-2xl p-6 max-w-2xl w-full max-h-[90vh] overflow-y-auto"
+                            initial={{ scale: 0.8, opacity: 0 }}
+                            animate={{ scale: 1, opacity: 1 }}
+                            exit={{ scale: 0.8, opacity: 0 }}
+                            transition={{ duration: 0.3 }}
+                            onClick={(e) => e.stopPropagation()}
+                        >
+                            <div className="flex justify-between items-start mb-6">
+                                <div className="flex items-center">
+                                    <div className="w-12 h-12 rounded-full bg-gradient-to-br from-indigo-500 to-sky-600 flex items-center justify-center mr-4">
+                                        <Calendar className="w-6 h-6 text-zinc-900" />
+                                    </div>
+                                    <h3 className="text-3xl font-semibold text-indigo-300">Schedule Consultation</h3>
+                                </div>
+                                <button
+                                    onClick={() => setShowConsultationModal(false)}
+                                    className="text-zinc-400 hover:text-white transition-colors cursor-pointer"
+                                >
+                                    <X className="w-6 h-6" />
+                                </button>
+                            </div>
+
+                            {consultationFormSuccess ? (
+                                <div className="text-center py-8">
+                                    <div className="w-16 h-16 rounded-full bg-green-500 flex items-center justify-center mx-auto mb-4">
+                                        <CheckCircle className="w-8 h-8 text-white" />
+                                    </div>
+                                    <h4 className="text-2xl font-semibold text-green-400 mb-2">Consultation Scheduled!</h4>
+                                    <p className="text-zinc-300">
+                                        Thank you for scheduling a consultation. We'll contact you within 24 hours to confirm your appointment.
+                                    </p>
+                                </div>
+                            ) : (
+                                <div>
+                                    <p className="text-zinc-300 mb-6 text-lg">
+                                        Let's discuss your web project in detail. Schedule a free 30-minute consultation call.
+                                    </p>
+
+                                    <form className="space-y-4" onSubmit={handleConsultationSubmit}>
+                                        <div className="grid grid-cols-2 gap-4">
+                                            <div>
+                                                <label className="block text-indigo-300 font-medium mb-2">Your Name *</label>
+                                                <input
+                                                    type="text"
+                                                    name="name"
+                                                    value={formData.name}
+                                                    onChange={handleInputChange}
+                                                    className="w-full px-3 py-2 bg-zinc-700 border border-zinc-600 rounded-lg text-white focus:border-indigo-400 focus:outline-none"
+                                                    placeholder="Enter your full name"
+                                                    required
+                                                />
+                                            </div>
+                                            <div>
+                                                <label className="block text-indigo-300 font-medium mb-2">Email Address *</label>
+                                                <input
+                                                    type="email"
+                                                    name="email"
+                                                    value={formData.email}
+                                                    onChange={handleInputChange}
+                                                    className="w-full px-3 py-2 bg-zinc-700 border border-zinc-600 rounded-lg text-white focus:border-indigo-400 focus:outline-none"
+                                                    placeholder="your@email.com"
+                                                    required
+                                                />
+                                            </div>
+                                        </div>
+
+                                        <div className="grid grid-cols-2 gap-4">
+                                            <div>
+                                                <label className="block text-indigo-300 font-medium mb-2">Phone Number</label>
+                                                <input
+                                                    type="tel"
+                                                    name="phone"
+                                                    value={formData.phone}
+                                                    onChange={handleInputChange}
+                                                    className="w-full px-3 py-2 bg-zinc-700 border border-zinc-600 rounded-lg text-white focus:border-indigo-400 focus:outline-none"
+                                                    placeholder="+1 (555) 123-4567"
+                                                />
+                                            </div>
+                                            <div>
+                                                <label className="block text-indigo-300 font-medium mb-2">Preferred Time</label>
+                                                <select 
+                                                    name="timeline"
+                                                    value={formData.timeline}
+                                                    onChange={handleInputChange}
+                                                    className="w-full px-3 py-2 bg-zinc-700 border border-zinc-600 rounded-lg text-white focus:border-indigo-400 focus:outline-none">
+                                                    <option value="">Select preferred time</option>
+                                                    <option value="morning">Morning (9 AM - 12 PM)</option>
+                                                    <option value="afternoon">Afternoon (12 PM - 5 PM)</option>
+                                                    <option value="evening">Evening (5 PM - 8 PM)</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div>
+                                            <label className="block text-indigo-300 font-medium mb-2">Project Brief</label>
+                                            <textarea
+                                                rows="3"
+                                                name="description"
+                                                value={formData.description}
+                                                onChange={handleInputChange}
+                                                className="w-full px-3 py-2 bg-zinc-700 border border-zinc-600 rounded-lg text-white focus:border-indigo-400 focus:outline-none"
+                                                placeholder="Brief description of your web project..."
+                                            ></textarea>
+                                        </div>
+
+                                        <div className="flex flex-wrap gap-4 pt-4">
+                                            <button
+                                                type="submit"
+                                                disabled={consultationFormLoading}
+                                                className="px-6 py-2 bg-gradient-to-r from-indigo-500 to-sky-600 text-zinc-900 rounded-lg font-semibold hover:shadow-lg hover:shadow-indigo-500/30 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center"
+                                            >
+                                                {consultationFormLoading ? (
+                                                    <>
+                                                        <Loader className="w-4 h-4 mr-2 animate-spin" />
+                                                        Scheduling...
+                                                    </>
+                                                ) : (
+                                                    'Schedule Consultation'
+                                                )}
+                                            </button>
+                                            <button
+                                                type="button"
+                                                onClick={() => setShowConsultationModal(false)}
+                                                disabled={consultationFormLoading}
+                                                className="px-6 py-2 border-2 border-zinc-600 text-zinc-300 rounded-lg hover:border-zinc-500 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+                                            >
+                                                Cancel
+                                            </button>
+                                        </div>
+                                    </form>
+                                </div>
                             )}
                         </motion.div>
                     </motion.div>
