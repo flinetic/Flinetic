@@ -70,7 +70,7 @@ const AppServices = () => {
         projectType: '',
         platform: '',
         budget: '',
-        appdescription: '',
+        description: '',
         timeline: '',
         package: selectedPackage,
     });
@@ -167,7 +167,7 @@ const AppServices = () => {
                 email: formData.email,
                 number: formData.phone,
                 timeline: formData.timeline, // can be preferred date/time
-                message: formData.description
+                description: formData.description
             }),
         });
         const emailResult = await emailResponse.json();
@@ -1042,8 +1042,8 @@ const AppServices = () => {
                                                 <div>
                                                     <label className="block text-indigo-300 font-medium mb-2">App Description *</label>
                                                     <textarea
-                                                        name="appdescription"
-                                                        value={formData.appdescription}
+                                                        name="description"
+                                                        value={formData.description}
                                                         onChange={handleInputChange}
                                                         rows="3"
                                                         className="w-full px-3 py-2 bg-zinc-700 border border-zinc-600 rounded-lg text-white focus:border-indigo-400 focus:outline-none"
