@@ -123,7 +123,7 @@ app.post("/send-email", async (req, res) => {
           <p><strong>Name:</strong> ${name}</p>
           <p><strong>Email:</strong> ${email}</p>
           <p><strong>Phone:</strong> ${number}</p>
-          <p><strong>App Type:</strong> ${projectType}</p>
+          <p><strong>App Type:</strong> ${appType}</p>
           <p><strong>Budget:</strong> ${budget}</p>
           <p><strong>Timeline:</strong> ${timeline}</p>
           <p><strong>Package:</strong> ${pkg || 'Not selected'}</p>
