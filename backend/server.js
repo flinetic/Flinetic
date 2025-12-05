@@ -72,11 +72,11 @@ app.post("/submit", async (req, res) => {
 });
 
 // ---- SEND EMAIL USING RESEND ----
+// ---- SEND EMAIL USING RESEND ----
 app.post("/send-email", async (req, res) => {
-  const { name, email, number, message } = req.body;
+  const { name, email, number, message, projectType, budget, timeline, package: pkg, formType } = req.body;
 
   try {
-    // Check if environment variables are set
     if (!process.env.RESEND_API_KEY) {
       throw new Error("RESEND_API_KEY is not configured");
     }
@@ -86,27 +86,68 @@ app.post("/send-email", async (req, res) => {
 
     console.log("Sending email to:", process.env.RECEIVER_EMAIL);
 
+    let subject = "";
+    let htmlBody = "";
+
+    switch(formType) {
+      case "contact":
+        subject = "New Contact Form Submission";
+        htmlBody = `
+          <h2>New Website Inquiry</h2>
+          <p><strong>Name:</strong> ${name}</p>
+          <p><strong>Email:</strong> ${email}</p>
+          <p><strong>Number:</strong> ${number}</p>
+          <p><strong>Message:</strong> ${message}</p>
+        `;
+        break;
+
+      case "webService": // Packages form
+        subject = "New Web Service / Package Inquiry";
+        htmlBody = `
+          <h2>New Web Service Inquiry</h2>
+          <p><strong>Name:</strong> ${name}</p>
+          <p><strong>Email:</strong> ${email}</p>
+          <p><strong>Phone:</strong> ${number}</p>
+          <p><strong>Project Type:</strong> ${projectType}</p>
+          <p><strong>Budget:</strong> ${budget}</p>
+          <p><strong>Timeline:</strong> ${timeline}</p>
+          <p><strong>Package:</strong> ${pkg || 'Not selected'}</p>
+          <p><strong>Description:</strong> ${message}</p>
+        `;
+        break;
+
+      case "consultation":
+        subject = "New Consultation Request";
+        htmlBody = `
+          <h2>New Consultation Request</h2>
+          <p><strong>Name:</strong> ${name}</p>
+          <p><strong>Email:</strong> ${email}</p>
+          <p><strong>Phone:</strong> ${number}</p>
+          <p><strong>Preferred Date/Time:</strong> ${timeline || 'Not provided'}</p>
+          <p><strong>Message:</strong> ${message}</p>
+        `;
+        break;
+
+      default:
+        throw new Error("Invalid formType provided");
+    }
+
     const response = await resend.emails.send({
       from: "Flinetic <onboarding@resend.dev>",
       to: process.env.RECEIVER_EMAIL,
-      subject: "New Contact Form Submission",
-      html: `
-        <h2>New Website Inquiry</h2>
-        <p><strong>Name:</strong> ${name}</p>
-        <p><strong>Email:</strong> ${email}</p>
-        <p><strong>Number:</strong> ${number}</p>
-        <p><strong>Message:</strong> ${message}</p>
-      `,
+      subject,
+      html: htmlBody,
     });
 
     console.log("✅ Email sent successfully:", response);
-
     res.json({ success: true, message: "Email sent successfully" });
+
   } catch (error) {
     console.error("❌ Email Error:", error);
     res.status(500).json({ success: false, error: error.message });
   }
 });
+
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Backend running on port ${PORT}`));
