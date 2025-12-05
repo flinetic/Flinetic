@@ -43,8 +43,11 @@ app.post("/submit", async (req, res) => {
   try {
     console.log("📝 Received data:", JSON.stringify(req.body, null, 2));
 
-    const scriptURL =
-      "https://script.google.com/macros/s/AKfycbxUX5xV3VZbf63tF12-W_Ks7QEfp6HhhCnuRa8C9ks2xL86rd9ppn1wgrEUYhOq1q9K4A/exec";
+    const scriptURL = process.env.GOOGLE_SCRIPT_URL;
+
+    if (!scriptURL) {
+      throw new Error("GOOGLE_SCRIPT_URL is missing from .env");
+    }
 
     const response = await fetch(scriptURL, {
       method: "POST",
