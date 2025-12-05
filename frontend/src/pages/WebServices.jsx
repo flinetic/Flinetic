@@ -1185,6 +1185,9 @@ const WebServices = () => {
                                                 <label className="block text-indigo-300 font-medium mb-2">Your Name *</label>
                                                 <input
                                                     type="text"
+                                                    name="name"
+                                                    value={formData.name}
+                                                    onChange={handleInputChange}
                                                     className="w-full px-3 py-2 bg-zinc-700 border border-zinc-600 rounded-lg text-white focus:border-indigo-400 focus:outline-none"
                                                     placeholder="Enter your full name"
                                                     required
@@ -1194,6 +1197,9 @@ const WebServices = () => {
                                                 <label className="block text-indigo-300 font-medium mb-2">Email Address *</label>
                                                 <input
                                                     type="email"
+                                                    name="email"
+                                                    value={formData.email}
+                                                    onChange={handleInputChange}
                                                     className="w-full px-3 py-2 bg-zinc-700 border border-zinc-600 rounded-lg text-white focus:border-indigo-400 focus:outline-none"
                                                     placeholder="your@email.com"
                                                     required
@@ -1206,13 +1212,20 @@ const WebServices = () => {
                                                 <label className="block text-indigo-300 font-medium mb-2">Phone Number</label>
                                                 <input
                                                     type="tel"
+                                                    name="phone"
+                                                    value={formData.phone}
+                                                    onChange={handleInputChange}
                                                     className="w-full px-3 py-2 bg-zinc-700 border border-zinc-600 rounded-lg text-white focus:border-indigo-400 focus:outline-none"
                                                     placeholder="+1 (555) 123-4567"
                                                 />
                                             </div>
                                             <div>
                                                 <label className="block text-indigo-300 font-medium mb-2">Preferred Time</label>
-                                                <select className="w-full px-3 py-2 bg-zinc-700 border border-zinc-600 rounded-lg text-white focus:border-indigo-400 focus:outline-none">
+                                                <select 
+                                                    name="timeline"
+                                                    value={formData.timeline}
+                                                    onChange={handleInputChange}
+                                                    className="w-full px-3 py-2 bg-zinc-700 border border-zinc-600 rounded-lg text-white focus:border-indigo-400 focus:outline-none">
                                                     <option value="">Select preferred time</option>
                                                     <option value="morning">Morning (9 AM - 12 PM)</option>
                                                     <option value="afternoon">Afternoon (12 PM - 5 PM)</option>
@@ -1225,6 +1238,9 @@ const WebServices = () => {
                                             <label className="block text-indigo-300 font-medium mb-2">Project Brief</label>
                                             <textarea
                                                 rows="3"
+                                                name="description"
+                                                value={formData.description}
+                                                onChange={handleInputChange}
                                                 className="w-full px-3 py-2 bg-zinc-700 border border-zinc-600 rounded-lg text-white focus:border-indigo-400 focus:outline-none"
                                                 placeholder="Brief description of your web project..."
                                             ></textarea>
