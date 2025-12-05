@@ -43,13 +43,13 @@ app.post("/submit", async (req, res) => {
   try {
     console.log("📝 Received data:", JSON.stringify(req.body, null, 2));
 
-    const GOOGLE_APP_SCRIPT = process.env.GOOGLE_SCRIPT_URL;
+    const GOOGLE_SCRIPT_URL = process.env.GOOGLE_SCRIPT_URL;
 
     if (!scriptURL) {
       throw new Error("GOOGLE_SCRIPT_URL is missing from .env");
     }
 
-    const response = await fetch(GOOGLE_APP_SCRIPT, {
+    const response = await fetch(GOOGLE_SCRIPT_URL, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(req.body),
